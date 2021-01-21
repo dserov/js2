@@ -5,7 +5,7 @@ const products = [
     {id: 4, title: 'Gamepad', price: 50},
 ];
 //Функция для формирования верстки каждого товара
-const renderProduct = ({title, price}) => {
+const renderProduct = ({title = 'No title', price = 'No price'}) => {
     return `<div class="product-item">
                 <h3 class="product-item__header">${title}</h3>
                 <p class="product-item__price">${price}</p>
