@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MacDak</title>
+</head>
+<body>
+<h1>Заказ гамбургера</h1>
+<form action="" id="hamburger_form" name="hamburger_form">
+    <fieldset id="hamburger_list">
+        <legend>Выберите гамбургер</legend>
+    </fieldset>
+    <br>
+    <fieldset id="filling_list">
+        <legend>Выберите добавки</legend>
+    </fieldset>
+    <br>
+    <fieldset id="sprinkling_list">
+        <legend>Выберите специи</legend>
+    </fieldset>
+    <hr>
+    <button type="submit">Расчет</button>
+    <button type="reset">Сброс</button>
+</form>
+<br>
+<fieldset>
+    <legend>Результат расчета</legend>
+    Цена: <span id="total_price">0</span><br>
+    Калории: <span id="calories">0</span>
+</fieldset>
+<script src="js/MacDak.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
