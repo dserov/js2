@@ -1,11 +1,11 @@
 'use strict';
 
 class CartItem extends ProductItem {
-    constructor(product, count) {
+    constructor(product, quantity) {
         super(product);
-        this.count = count;
+        this.quantity = quantity;
     }
     totalSumma() {
-        return this.price * this.count
+        return this.price * this.quantity
     }
 }

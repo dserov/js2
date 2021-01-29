@@ -1,12 +1,26 @@
 'use strict';
 
 class ProductList {
-    constructor(products, element = '.products') {
+    constructor(element = '.products') {
         this.renderElement = document.querySelector(element);
         this.productList = [];
-        products.forEach( product => {
-            let productItem = new ProductItem(product);
-            this.productList.push(productItem);
+    }
+
+    fetchProducts() {
+        return new Promise((resolve, reject) => {
+            const request = makeGETRequest(GET_CATALOG_DATA);
+            request.then(data => {
+                    // process json result
+                    for (let item of data) {
+                        let productItem = new ProductItem(item);
+                        this.productList.push(productItem);
+                    }
+                    resolve();
+                },
+                reason => {
+                    reject(reason);
+                }
+            );
         });
     }
 
@@ -15,7 +29,7 @@ class ProductList {
      */
     render() {
         this.renderElement.textContent = '';
-        this.productList.forEach( productItem => {
+        this.productList.forEach(productItem => {
             this.renderElement.insertAdjacentHTML('beforeend', productItem.render());
         });
     }
@@ -26,6 +40,6 @@ class ProductList {
      * @return {*|number}
      */
     calcTotalPrice() {
-        return this.productList.reduce( (accum, product) => accum + product.price, 0);
+        return this.productList.reduce((accum, product) => accum + product.price, 0);
     }
 }
