@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style rel="stylesheet">
+        .err_field {
+            border: 1px solid red;
+        }
+    </style>
+</head>
+<body>
+<form id="feedback" name="feedback" action="?" method="post">
+    Имя, Телефон, E-mail, текст, кнопка Отправить
+
+    <label>Имя <input data-validator-type="text" type="text" name="name" id="name" placeholder="Your name" value=""></label>
+    <br>
+    <br>
+    <label>Телефон <input data-validator-type="phone" type="text" name="phone" id="phone" placeholder="+70001234567" value=""></label>
+    <br>
+    <br>
+    <label>E-mail <input data-validator-type="email" type="text" name="email" id="email" placeholder="email@mail.ru" value=""></label>
+    <br>
+    <br>
+    <label>Сообщение <textarea data-validator-type="text" name="message" id="message" cols="30" rows="10" placeholder="Your text"></textarea></label>
+    <br>
+    <br>
+    <button type="submit">ОТПРАВИТЬ</button>
+</form>
+<script>
+    'use strict';
+
+    let form = document.querySelector('#feedback');
+    form.addEventListener('submit', validateForm);
+
+    function validateForm(e) {
+        // почистим ошибки
+        let inputs = document.querySelectorAll('.err_field');
+        inputs.forEach(function (el) {
+            el.classList.remove('err_field');
+        });
+
+
+        let inputList = document.querySelectorAll('#feedback input, #feedback textarea');
+        inputList.forEach(elementNode => {
+            checkField(elementNode);
+        });
+
+        let errorInputList = document.querySelectorAll('.err_field');
+        if (errorInputList.length > 0) {
+            // ошибки, отменим сабмит
+            e.preventDefault();
+            return false;
+        }
+
+        alert('SUBMITTED');
+        e.preventDefault();
+        return false;
+    }
+
+    function checkField(elementNode, errClass = 'err_field') {
+        let validatorTypeText = elementNode.dataset['validatorType'];
+        let validator = validateField.create(validatorTypeText);
+        if (validator.validate(elementNode)) {
+            removeErrClass(elementNode, errClass);
+        } else {
+            addErrClass(elementNode, errClass);
+        }
+    }
+
+    function addErrClass(elementNode, errClass) {
+        if (!elementNode.classList.contains(errClass)) {
+            elementNode.classList.add(errClass);
+        }
+    }
+
+    function removeErrClass(elementNode, errClass) {
+        if (elementNode.classList.contains(errClass)) {
+            elementNode.classList.remove(errClass);
+        }
+    }
+
+    // попытка использовать фабрику
+    class validateField {
+        static create(type) {
+            let validator;
+            if (type === 'email') {
+                validator = new validateEmail();
+            }
+            if (type === 'text') {
+                validator = new validateText();
+            }
+            if (type === 'phone') {
+                validator = new validatePhone();
+            }
+            return validator || new validateField();
+        }
+
+        /**
+         * stub
+         *
+         * @param elementNode
+         * @return {boolean}
+         */
+        validate(elementNode) {
+            return false;
+        }
+    }
+
+    class validateEmail extends validateField {
+        validate(elementNode) {
+            let value = elementNode.value;
+            const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(value.toLowerCase());
+        }
+    }
+
+    class validatePhone extends validateField {
+        validate(elementNode) {
+            let value = elementNode.value;
+            const re = /^\+7\d{10}$/;
+            return re.test(value.toLowerCase());
+        }
+    }
+
+    class validateText extends validateField {
+        validate(elementNode) {
+            let value = elementNode.value;
+            return value.length > 0;
+        }
+    }
+</script>
+</body>
+</html>

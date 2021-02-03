@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    'use strict';
+
+    class Animal {
+        constructor(name) {
+            this.name = name;
+            this._init();
+        }
+        _init() {
+            // return false;
+            this.name = 'Animal default name';
+        }
+        speak() {
+            console.log('Animal ' + this.name);
+        }
+    }
+
+    class Dog extends Animal {
+        constructor(name) {
+            super(name);
+        }
+
+        _init() {
+            // this.name = 'qwe';
+        }
+
+        speak() {
+            console.log('Dog ' + this.name);
+        }
+    }
+
+    let dog = new Dog('Bobik');
+    dog.speak();
+
+
+</script>
+</body>
+</html>
