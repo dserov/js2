@@ -34,7 +34,7 @@
     document.querySelector('#field1-btn').addEventListener('click', () => {
         let area = document.querySelector('#field1');
         let content = area.value;
-        content = content.replaceAll(/'/g, '"');
+        content = content.replaceAll(/\B'|'\B/g, '"');
         area.value = content;
     })
 </script>
