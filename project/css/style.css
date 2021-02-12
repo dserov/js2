@@ -170,3 +170,20 @@ img {
     border: none;
     border-bottom: 2px solid #fafafa;
 }
+
+.alert-box {
+    border: 1px solid red;
+    padding: 20px;
+    background-color: lightgoldenrodyellow;
+}
+
+.cart-item-count {
+    font-size: smaller;
+    position: absolute;
+    top: -18px;
+    right: -14px;
+    border-radius: 50%;
+    background-color: blue;
+    color: white;
+    border: 9px solid blue;
+}
