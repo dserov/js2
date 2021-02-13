@@ -29,16 +29,17 @@
 
                 <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
                     <ul class="navbar-nav">
-                        <li class="nav-item"><a class="nav-link" href="/"
-                                                title="Главная страница">Главная</a>
+                        <li class="nav-item">
+                            <router-link class="nav-link" title="Главная страница" to="/" exact>Главная</router-link>
                         </li>
-                        <li class="nav-item"><a class="nav-link" href="/?page=catalog"
-                                                title="Переход в каталог товаров">Каталог товаров</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/?page=feedback"
-                                                title="Отзывы о сайте">Отзывы</a>
+                        <li class="nav-item">
+                            <router-link class="nav-link" title="Переход в каталог товаров" to="/catalog" esact>Каталог товаров</router-link>
                         </li>
-                        <li class="nav-item"><a class="nav-link" href="/?page=contacts"
-                                                title="Контактные реквизиты">Контакты</a>
+                        <li class="nav-item">
+                            <router-link class="nav-link" title="Отзывы о сайте" to="/feedback" exact>Отзывы</router-link>
+                        </li>
+                        <li class="nav-item">
+                            <router-link class="nav-link" title="Контактные реквизиты" to="/contacts" exact>Контакты</router-link>
                         </li>
                     </ul>
                 </div>
@@ -47,19 +48,7 @@
         </div>
         <alert-box :message="errorText" @on-clear-error="errorText = ''"></alert-box>
 
-        <h1>Каталог</h1>
-        <div class="tovar_list clearfix d-md-flex">
-            <p class=".goods-list" v-if="products.length === 0">Список товаров пуст!</p>
-            <div class="card" v-for="product of filteredProducts" :key="product.id_product">
-                <img class="card-img-top mt-3 mb-sm-3" :src="product.img_product" width="128" height="128">
-                <div class="card-body">
-                    <h5 class="card-title">{{product.product_name}}</h5>
-                    <p>Цена: {{product.price}}</p>
-                    <button class="buy-btn" @click="$refs.cart.addProduct(product)">Купить</button>
-                </div>
-            </div>
-        </div>
-
+        <router-view ref="view"></router-view>
         <div id="pull"></div>
     </div>
     <div class="footer">
@@ -83,10 +72,15 @@
         integrity="sha384-0pzryjIRos8mFBWMzSSZApWtPl/5++eIfzYmTgBBmXYdhvxPc+XcFEk+zJwDgWbP"
         crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/vue-router@2.0.0/dist/vue-router.js"></script>
 <script src="js/alert-box.js"></script>
 <script src="js/search-form.js"></script>
 <script src="js/cart-item-component.js"></script>
 <script src="js/cart-component.js"></script>
+<script src="js/pageMain.js"></script>
+<script src="js/pageContacts.js"></script>
+<script src="js/pageCatalog.js"></script>
+<script src="js/pageFeedback.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>

@@ -46,6 +46,11 @@ h3 {
 }
 
 /* меню сайта */
+.nav-link.router-link-active {
+    background-color: #9c5b8f;
+    color: #f8f8f8;
+}
+
 .nav-item {
     font-style: italic;
     font-size: 1.3em;

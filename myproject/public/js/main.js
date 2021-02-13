@@ -1,11 +1,20 @@
 const API = '//localhost:3000';
 
+const routes = [
+    {path: '/', component: pageMain()},
+    {path: '/catalog', component: pageCatalog()},
+    {path: '/contacts', component: pageContacts()},
+    {path: '/feedback', component: pageFeedback()}
+];
+
+const router = new VueRouter({
+    routes: routes
+});
+
 const app = new Vue({
+    router: router,
     el: '#app',
     data: {
-        catalogUrl: '/api/products',
-        products: [],
-        filteredProducts: [],
         errorText: ''
     },
     methods: {
@@ -29,7 +38,7 @@ const app = new Vue({
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(data) // body data type must match "Content-Type" header
-                })
+            })
                 .then(result => {
                     if (result.ok !== true) {
                         throw new Error(`${url} = Код возвата: ${result.status}`);
@@ -48,7 +57,7 @@ const app = new Vue({
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(data) // body data type must match "Content-Type" header
-                })
+            })
                 .then(result => {
                     if (result.ok !== true) {
                         throw new Error(`${url} = Код возвата: ${result.status}`);
@@ -67,7 +76,7 @@ const app = new Vue({
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(data) // body data type must match "Content-Type" header
-                })
+            })
                 .then(result => {
                     if (result.ok !== true) {
                         throw new Error(`${url} = Код возвата: ${result.status}`);
@@ -79,23 +88,8 @@ const app = new Vue({
                     throw new Error(error.message);
                 })
         },
-        onFilterGoods(searchLine) {
-            let regex = new RegExp(searchLine, 'i');
-            this.filteredProducts = this.products.filter(
-                product => regex.test(product.product_name)
-            );
-        },
         showErrorBox(message) {
             this.errorText = message;
         },
-    },
-    mounted() {
-        this.getJson(`${API + this.catalogUrl}`)
-            .then(data => {
-                for (let el of data) {
-                    this.products.push(el);
-                }
-            })
-            .finally(() => this.onFilterGoods(''));
     }
 });
