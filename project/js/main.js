@@ -3,84 +3,50 @@ const API = 'https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-a
 const app = new Vue({
     el: '#app',
     data: {
-        catalogUrl: '/catalogData.json',
-        cartUrl: '/getBasket.json',
-        products: [],
         imgCatalog: 'https://placehold.it/200x150',
-        userSearch: '',
-        show: false,
-        isVisibleCart: false,
-        cartProducts: [],
-        searchLine: '',
-        filteredProducts: []
+        catalogUrl: '/catalogData.json',
+        products: [],
+        filteredProducts: [],
+        errorText: ''
     },
     methods: {
         getJson(url) {
             return fetch(url)
-                .then(result => result.json())
+                .then(result => {
+                    if (result.ok !== true) {
+                        throw new Error(`${url} = Код возвата: ${result.status}`);
+                    }
+                    return result.json()
+                })
                 .catch(error => {
-                    console.log(error);
+                    this.errorText = error.message;
+                    throw new Error(error.message);
                 })
         },
-        addProduct(product) {
-            let productIndex = this.cartProducts.map(item => item.id_product).indexOf(product.id_product);
-            if (productIndex !== -1) {
-                // увеличим количество
-                this.cartProducts[productIndex].quantity++;
-                return;
-            }
-            // добавим новый
-            let cartItem = Object.assign({}, product);
-            cartItem.quantity = 1;
-            this.cartProducts.push(cartItem);
-        },
-        deleteProduct() {
-            let id_product = parseInt(event.target.dataset['id']);
-            let productIndex = this.cartProducts.map(item => item.id_product).indexOf(id_product);
-            if (productIndex === -1) {
-                return;
-            }
-            // найден!
-            this.cartProducts[productIndex].quantity--;
-            if (this.cartProducts[productIndex].quantity === 0) {
-                this.cartProducts.splice(productIndex, 1);
-            }
-        },
-        readCartFromApi() {
-            // прочитаем корзину с сервака
-            this.getJson(`${API + this.cartUrl}`)
-                .then(data => {
-                    for (let el of data.contents) {
-                        this.cartProducts.push(el);
-                    }
-                });
-        },
-        filterGoods() {
-            let regex = new RegExp(this.searchLine, 'i');
+        onFilterGoods(searchLine) {
+            let regex = new RegExp(searchLine, 'i');
             this.filteredProducts = this.products.filter(
                 product => regex.test(product.product_name)
             );
         },
-        initLists() {
-            this.readCartFromApi();
-            this.filterGoods();
-        }
+        showErrorBox(message) {
+            this.errorText = message;
+        },
     },
     mounted() {
-        this.getJson(`getProducts.json`)
+        let p1 = this.getJson(`getProducts.json`)
             .then(data => {
                 for (let el of data) {
                     this.products.push(el);
                 }
             });
-        this.getJson(`${API + this.catalogUrl}`)
+        let p2 = this.getJson(`${API + this.catalogUrl}`)
             .then(data => {
                 for (let el of data) {
                     this.products.push(el);
                 }
-                this.initLists();
             });
-
+        Promise.allSettled([p1, p2]).finally(() => this.onFilterGoods(''));
     }
 });
 

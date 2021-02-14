@@ -10,34 +10,10 @@
 <div id="app">
     <header>
         <div class="logo">E-shop</div>
-        <div class="cart">
-            <form action="#" class="search-form">
-                <input type="text" class="search-field" v-model.lazy="searchLine">
-                <button class="btn-search" type="submit" @click="filterGoods">
-                    <i class="fas fa-search"></i>
-                </button>
-            </form>
-            <button class="btn-cart" type="button" @click="isVisibleCart = !isVisibleCart">Корзина</button>
-            <div v-if="isVisibleCart" class="cart-block">
-                <p v-if="cartProducts.length === 0">Корзина пуста!</p>
-                <div class="cart-item" v-for="item of cartProducts" :key="item.id_product" :data-id="item.id_product">
-                    <div class="product-bio">
-                        <img :src="imgCatalog" alt="Some image">
-                    </div>
-                    <div class="product-desc">
-                        <p class="product-title">{{item.product_name}}</p>
-                        <p class="product-quantity">Quantity: {{item.quantity}}</p>
-                        <p class="product-single-price">${{item.price}} each</p>
-                    </div>
-                    <div class="right-block">
-                        <p class="product-price">${{item.quantity*item.price}}</p>
-                        <button class="del-btn" :data-id="item.id_product" @click="deleteProduct()">&times;</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <cart-component ref="cart"></cart-component>
     </header>
     <main>
+        <alert-box :message="errorText" @on-clear-error="errorText = ''"></alert-box>
         <div class="products">
             <p class=".goods-list" v-if="products.length === 0">Список товаров пуст!</p>
             <div class="product-item" v-for="product of filteredProducts" :key="product.id_product">
@@ -45,7 +21,7 @@
                 <div class="desc">
                     <h3>{{product.product_name}}</h3>
                     <p>{{product.price}} $</p>
-                    <button class="buy-btn" @click="addProduct(product)">Купить</button>
+                    <button class="buy-btn" @click="$refs.cart.addProduct(product)">Купить</button>
                 </div>
             </div>
         </div>
@@ -53,6 +29,10 @@
 </div>
     <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js" integrity="sha384-0pzryjIRos8mFBWMzSSZApWtPl/5++eIfzYmTgBBmXYdhvxPc+XcFEk+zJwDgWbP" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="js/alert-box.js"></script>
+    <script src="js/search-form.js"></script>
+    <script src="js/cart-item-component.js"></script>
+    <script src="js/cart-component.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>
