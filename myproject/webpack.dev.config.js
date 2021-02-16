@@ -12,6 +12,7 @@ module.exports = {
       filename: "js/[name].js"
     },
     target: 'web',
+    watch: true,
     devtool: "#source-map",
     devServer: {
         port: 3000

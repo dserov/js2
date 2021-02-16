@@ -14,8 +14,8 @@ module.exports = {
         publicPath: "/",
         filename: "js/[name].js"
     },
+    watch: true,
     target: 'web',
-    devtool: "#source-map",
     optimization: {
         minimizer: [
             new UglifyJsPlugin({
