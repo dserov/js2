@@ -1,4 +1,4 @@
-Vue.component('cart-item-component', {
+export default {
     data: function () {
         return {
             imgCatalog: 'https://placehold.it/100x50',
@@ -21,4 +21,4 @@ Vue.component('cart-item-component', {
                        <button class="del-btn" :data-id="cartItem.id_product" @click="$parent.deleteProduct()">&times;</button>
                    </div>
                </div>`
-});
+}

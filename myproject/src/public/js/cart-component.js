@@ -1,4 +1,8 @@
-Vue.component('cart-component', {
+import searchForm from './search-form'
+import cartItemComponent from './cart-item-component'
+import { API } from './main'
+
+export default {
     data: function () {
         return {
             isVisibleCart: false,
@@ -6,6 +10,10 @@ Vue.component('cart-component', {
             cartUrl: '/api/cart/',
             isVisibleSearchForm: false
         }
+    },
+    components: {
+        'cart-item-component': cartItemComponent,
+        'search-form': searchForm
     },
     computed: {
         itemsCount() {
@@ -72,4 +80,4 @@ Vue.component('cart-component', {
                 }
             });
     }
-});
+}

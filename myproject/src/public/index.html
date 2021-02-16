@@ -8,9 +8,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/style.css">
-
-    <title>Каталог товаров</title>
+    <title>Интернет-магазин "АВАЛОН"</title>
 </head>
 <body>
 <div id="app" class="container">
@@ -19,7 +17,7 @@
             <nav class="navbar navbar-expand-md d-flex align-items-end">
                 <a class="navbar-brand" href="#">
                     <span class="d-md-none logo-text">AVALON</span>
-                    <img class="d-none d-md-block" src="/img/logo_small.jpg" alt="">
+                    <img class="d-none d-md-block" src="img/logo_small.jpg" alt="">
                 </a>
                 <button class="navbar-light navbar-toggler" type="button" data-toggle="collapse"
                         data-target="#navbarsExampleDefault"
@@ -33,7 +31,7 @@
                             <router-link class="nav-link" title="Главная страница" to="/" exact>Главная</router-link>
                         </li>
                         <li class="nav-item">
-                            <router-link class="nav-link" title="Переход в каталог товаров" to="/catalog" esact>Каталог товаров</router-link>
+                            <router-link class="nav-link" title="Переход в каталог товаров" to="/catalog" exact>Каталог товаров</router-link>
                         </li>
                         <li class="nav-item">
                             <router-link class="nav-link" title="Отзывы о сайте" to="/feedback" exact>Отзывы</router-link>
@@ -56,16 +54,6 @@
     </div>
 </div>
 
-<div id="loading-layer" class="overlay">
-    <div id="loading-layer-text">Загрузка. Пожалуйста, подождите...
-        <br>
-        <img src="img/loading.gif" border="0" alt="loading...">
-    </div>
-</div>
-<div id="message-layer" class="overlay">
-    <div id="message-layer-text" class="errorbox">stub</div>
-</div>
-
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js"
@@ -73,14 +61,5 @@
         crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://unpkg.com/vue-router@2.0.0/dist/vue-router.js"></script>
-<script src="js/alert-box.js"></script>
-<script src="js/search-form.js"></script>
-<script src="js/cart-item-component.js"></script>
-<script src="js/cart-component.js"></script>
-<script src="js/pageMain.js"></script>
-<script src="js/pageContacts.js"></script>
-<script src="js/pageCatalog.js"></script>
-<script src="js/pageFeedback.js"></script>
-<script src="js/main.js"></script>
 </body>
 </html>

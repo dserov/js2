@@ -1,0 +1,27 @@
+{
+    "amount": 57300,
+    "countGoods": 3,
+    "contents": [
+        {
+            "quantity": 1,
+            "id_product": 11,
+            "product_name": "Milk bowl",
+            "img_product": "img/11.jpg",
+            "price": 7500
+        },
+        {
+            "quantity": 1,
+            "id_product": 16,
+            "product_name": "Golden chair",
+            "img_product": "img/16.jpg",
+            "price": 37000
+        },
+        {
+            "quantity": 1,
+            "id_product": 12,
+            "product_name": "cappuccino set",
+            "img_product": "img/12.jpg",
+            "price": 12800
+        }
+    ]
+}

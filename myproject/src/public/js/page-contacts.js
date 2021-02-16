@@ -1,6 +1,5 @@
-const pageContacts = () => {
-    return {
-        template: `    <div>
+export default {
+    template: `    <div>
         <h1>Напишите нам</h1>
         <form action="#">
             <fieldset>
@@ -34,5 +33,4 @@ const pageContacts = () => {
             <component is="script" src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A549f251a6b397bbf4c2d5a56d5f64fee1d882083791bf98fe0aa1309fb9965c6&amp;width=100%25&amp;height=374&amp;lang=ru_RU&amp;scroll=true" async></component>
         </div>
     </div>`
-    }
-};
+}

@@ -1,6 +1,6 @@
 const fs = require('fs');
 const moment = require('moment');
-const LOGFILENAME = 'server/db/stats.json';
+const LOGFILENAME = 'dist/server/db/stats.json';
 
 const log = (action, productName) => {
     try {
