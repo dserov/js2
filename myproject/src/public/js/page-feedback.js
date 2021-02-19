@@ -1,6 +1,5 @@
-const pageFeedback = () => {
-    return {
-        template: `<div><h1>Отзывы</h1>
+export default {
+    template: `<div><h1>Отзывы</h1>
 <table class="tbl_harakteristiki">
     <tr>
         <th>Автор</th>
@@ -31,5 +30,4 @@ const pageFeedback = () => {
                     <button type="submit" name="action" value="add">Добавить отзыв</button>
             </div>
 </form></div>`
-    }
-};
+}

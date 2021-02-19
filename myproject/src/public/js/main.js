@@ -1,17 +1,24 @@
+import alertBox from './alert-box'
+import cartComponent from './cart-component'
+import pageMain from './page-main'
+import pageCatalog from './page-catalog'
+import pageContacts from './page-contacts'
+import pageFeedback from './page-feedback'
+
 const API = '//localhost:3000';
 
 const routes = [
-    {path: '/', component: pageMain()},
-    {path: '/catalog', component: pageCatalog()},
-    {path: '/contacts', component: pageContacts()},
-    {path: '/feedback', component: pageFeedback()}
+    {path: '/', component: pageMain},
+    {path: '/catalog', component: pageCatalog},
+    {path: '/contacts', component: pageContacts},
+    {path: '/feedback', component: pageFeedback}
 ];
 
 const router = new VueRouter({
     routes: routes
 });
 
-const app = new Vue({
+const mainApp = {
     router: router,
     el: '#app',
     data: {
@@ -91,5 +98,11 @@ const app = new Vue({
         showErrorBox(message) {
             this.errorText = message;
         },
+    },
+    components: {
+        'alert-box': alertBox,
+        'cart-component': cartComponent,
     }
-});
+}
+
+export { API, mainApp };

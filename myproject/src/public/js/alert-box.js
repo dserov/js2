@@ -1,4 +1,4 @@
-Vue.component('alert-box', {
+export default {
     props: {
         message: String
     },
@@ -9,4 +9,4 @@ Vue.component('alert-box', {
       <button @click="$emit('on-clear-error')">Close</button>
     </div>
   `
-});
+}
